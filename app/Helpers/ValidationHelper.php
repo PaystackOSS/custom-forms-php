@@ -1,5 +1,6 @@
 <?php
   use Illuminate\Http\Request;
+  use Illuminate\Support\Facades\Log;
 
   function validateRequest($request)
   {
@@ -25,6 +26,8 @@
     $date = date(DATE_ISO8601);
     $md5Hash = createMD5Hash($response);
     $hmacHash = createHMACHash([$date, $md5Hash]);
+
+    Log::info($md5Hash);
 
     return [
       "date" => $date,
