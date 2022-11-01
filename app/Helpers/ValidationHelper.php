@@ -27,7 +27,8 @@
     $md5Hash = createMD5Hash($response);
     $hmacHash = createHMACHash([$date, $md5Hash]);
 
-    Log::info($md5Hash);
+    Log::info("MD5 hash: ".$md5Hash);
+    Log::info("HMAC hash: ".$hmacHash);
 
     return [
       "date" => $date,
