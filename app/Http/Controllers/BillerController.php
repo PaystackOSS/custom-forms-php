@@ -13,8 +13,17 @@ class BillerController extends Controller
     {
         // Get Terminal ID if you need some checks before building the form
         $terminal_id = $request->query('terminal_id');
+        $isRequestValid = validateRequest($request);
+        
+        if(!$isRequestValid) {
+            return response()->json([
+                "status" =>  false,
+                "message" => "Not authorized"
+            ], 401);
+        }
 
-        return [
+        // create response JSON
+        $response = [
 	        "action" => "collect",
 	        "title" => "User Information",
             "fields" => [
@@ -63,6 +72,32 @@ class BillerController extends Controller
                     ]
                 ]
             ]
+        ];
+
+        $responseHeader = createResponseHeader($response);
+
+        return response($response)->withHeaders($responseHeader);
+    }
+
+    public function processForm(Request $request)
+    {
+        $isRequestValid = validateRequest($request);
+        
+        if(!$isRequestValid) {
+            return response()->json([
+                "status" =>  false,
+                "message" => "Not authorized"
+            ], 401);
+        }
+
+        // parse request here
+        $body = $request->post();
+
+        // create response JSON
+        // $response
+
+        return [
+            "data" => $body
         ];
     }
 }

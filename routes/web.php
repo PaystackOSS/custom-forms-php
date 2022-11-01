@@ -19,3 +19,4 @@ Route::get('/', function () {
 });
 
 Route::get('/paystack/biller', [BillerController::class, 'retrieveForm']);
+Route::post('/paystack/biller', [BillerController::class, 'processForm']);
