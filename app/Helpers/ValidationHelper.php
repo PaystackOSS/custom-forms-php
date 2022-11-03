@@ -25,7 +25,8 @@
   {
     // $date = date(DATE_ISO8601);
     $timestamp = new DateTime();
-    $date = $timestamp->format('c');
+    // $date = $timestamp->format('c');
+    $date = $timestamp->format('Y-m-d\TH:i:s\Z');
     $md5Hash = createMD5Hash($response);
     $hmacHash = createHMACHash([$date, $md5Hash]);
 
