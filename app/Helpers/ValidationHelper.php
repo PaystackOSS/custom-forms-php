@@ -23,10 +23,13 @@
 
   function createResponseHeader($response)
   {
-    $date = date(DATE_ISO8601);
+    // $date = date(DATE_ISO8601);
+    $timestamp = new DateTime();
+    $date = $timestamp->format('c');
     $md5Hash = createMD5Hash($response);
     $hmacHash = createHMACHash([$date, $md5Hash]);
 
+    Log::info("Date: ".$date);
     Log::info("MD5 hash: ".$md5Hash);
     Log::info("HMAC hash: ".$hmacHash);
 
